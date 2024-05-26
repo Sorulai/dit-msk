@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
 from .models import MeetingRoom, Booking
 
 
@@ -62,6 +61,9 @@ class BookingSerializer(serializers.ModelSerializer):
 
         if existing_booking:
             raise serializers.ValidationError("Booking already exists for this time")
+
+        if start_time.time() < datetime.time(7, 0) or end_time.time() > datetime.time(23, 0):
+            raise serializers.ValidationError("Booking must be between 7:00 and 23:00")
 
         attrs['start_time'] = start_time
         attrs['end_time'] = end_time
