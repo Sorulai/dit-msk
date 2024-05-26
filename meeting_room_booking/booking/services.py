@@ -1,5 +1,4 @@
 import os
-
 from django.conf import settings
 from docx import Document
 from datetime import datetime, timedelta

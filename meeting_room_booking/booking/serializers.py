@@ -120,3 +120,4 @@ class BookingDetailSerializer(serializers.ModelSerializer):
 class GenerateReportSerializer(serializers.Serializer):
     start_date = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
     end_date = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
+    room_id = serializers.IntegerField(required=False)

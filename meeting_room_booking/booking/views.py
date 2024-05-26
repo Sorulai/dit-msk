@@ -1,5 +1,4 @@
 import os
-from datetime import datetime, timedelta
 from django.conf import settings
 from .services import processing_dates
 from .tasks import generate_report_task
@@ -77,7 +76,7 @@ class GenerateReportView(generics.CreateAPIView):
 
         start_date = serializer.validated_data['start_date']
         end_date = serializer.validated_data['end_date']
-        room_id = request.query_params.get('room_id', None)
+        room_id = serializer.validated_data['room_id']
 
         task = generate_report_task.delay(start_date, end_date, room_id)
         return Response({'task_id': task.id}, status=202)
