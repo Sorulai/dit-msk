@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
+from django.utils import timezone
+from booking.models import MeetingRoom, Booking
 
 
 class MeetingRoomBookingAPITestCase(APITestCase):
@@ -14,6 +16,15 @@ class MeetingRoomBookingAPITestCase(APITestCase):
         self.email = "testuser@example.com"
         self.user = User.objects.create_user(username=self.username, password=self.password, email=self.email)
         self.client.force_authenticate(user=self.user)
+
+        self.room = MeetingRoom.objects.create(name="Test Room")
+        self.booking = Booking.objects.create(
+            room=self.room,
+            user=self.user,
+            start_time=timezone.now() - timedelta(hours=1),
+            end_time=timezone.now() + timedelta(hours=1),
+            purpose="Test Booking"
+        )
 
     def test_list_meeting_rooms(self):
         """
@@ -107,10 +118,9 @@ class MeetingRoomBookingAPITestCase(APITestCase):
     def test_generate_report(self):
         """
         Тест - генерация отчета
-
         """
         start_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        end_date = datetime.now().strftime("%Y-%m-%d")
+        end_date = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
         data = {
             "start_date": start_date,
             "end_date": end_date,
@@ -137,7 +147,7 @@ class MeetingRoomBookingAPITestCase(APITestCase):
         Тест - загрузка отчета
         """
         start_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        end_date = datetime.now().strftime("%Y-%m-%d")
+        end_date = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
         data = {
             "start_date": start_date,
             "end_date": end_date,
