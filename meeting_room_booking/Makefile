@@ -1,4 +1,4 @@
-.PHONY: run migrate createsuperuser celery test build run-local migrate-local createsuperuser-local celery-local test-local install-reqs create_media
+.PHONY: run migrate createsuperuser celery test build run-local createsuperuser-local celery-local test-local create_init
 
 # Docker commands
 run:
@@ -23,9 +23,6 @@ build:
 run-local:
 	python manage.py runserver 0.0.0.0:8000
 
-migrate-local:
-	python manage.py migrate
-
 createsuperuser-local:
 	python manage.py createsuperuser
 
@@ -35,8 +32,5 @@ celery-local:
 test-local:
 	python manage.py test -v 2
 
-install-reqs:
-	pip install -r requirements.txt
-	
-create_media:
-	mkdir "media"
+create_init:
+	mkdir "media" && pip install -r requirements.txt && python manage.py migrate

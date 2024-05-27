@@ -50,9 +50,7 @@
 ## Запуск локально
 
 - В `.env` файле нужно изменить `REDIS_HOST` на `localhost`
-- Запустить команду `make create_media`
-- Запустить команду `make install-reqs`
-- Запустить команду `make migrate-local`
+- Запустить команду `make create_init`
 - Запустить команду `make createsuperuser-local` по необходимости 
 - Запустить команду `make run-local`
 - В новом терминале перейти в `cd dit-msk/meeting_room_booking` 
