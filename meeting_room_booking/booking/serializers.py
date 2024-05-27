@@ -102,7 +102,7 @@ class MeetingRoomBookingSerializer(serializers.ModelSerializer):
 class RoomBookingSerializer(serializers.Serializer):
     start_time = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
     end_time = serializers.DateTimeField(format='%d.%m.%Y %H:%M')
-    flag = serializers.BooleanField()
+    booked = serializers.BooleanField()
 
 
 class BookingDetailSerializer(serializers.ModelSerializer):

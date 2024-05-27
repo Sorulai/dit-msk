@@ -51,7 +51,7 @@ def processing_dates(room):
         result = {
             'start_time': slot,
             'end_time': slot + timedelta(hours=1),
-            'flag': slot in booked_times
+            'booked': slot in booked_times
         }
         results.append(result)
 
