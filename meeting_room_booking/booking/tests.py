@@ -124,6 +124,7 @@ class MeetingRoomBookingAPITestCase(APITestCase):
         data = {
             "start_date": start_date,
             "end_date": end_date,
+            "room_id": 0
         }
         response = self.client.post("/api/report/", data, format="json")
         self.assertEqual(response.status_code, 202)
@@ -136,6 +137,7 @@ class MeetingRoomBookingAPITestCase(APITestCase):
         data = {
             "start_date": "invalid-date",
             "end_date": "invalid-date",
+            "room_id": 0
         }
         response = self.client.post("/api/report/", data, format="json")
         self.assertEqual(response.status_code, 400)
@@ -151,6 +153,7 @@ class MeetingRoomBookingAPITestCase(APITestCase):
         data = {
             "start_date": start_date,
             "end_date": end_date,
+            "room_id": 0
         }
         response = self.client.post("/api/report/", data, format="json")
         task_id = response.json()["task_id"]
